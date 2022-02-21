@@ -7,40 +7,55 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
-static int iterador = 1;
+static int altura = 0;
 
-void contador(typename Abin<tElto>::nodo n)
+int calcular_altura(typename Abin<tElto>::nodo n,int aux)
 {
-    Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
+     Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
 
-    if (n!=Abin<tElto>::NODO_NULO)
+    if(n == Abin<tElto>::NODO_NULO)
     {
+        return 0;
+    }else
+    {   
         m = n;
-
+        
         if(m->hizq != Abin<tElto>::NODO_NULO)
         {
-            iterador++;
-            contador(m->hizq);
-
-        }
+            calcular_altura(m->hizq, aux);
+        }else if(m->hizq == Abin<tElto>::NODO_NULO)
+        {
+           if(altura<aux)
+           {
+               altura=aux;
+           } 
+            aux--;
+        }        
+        
         if(m->hder != Abin<tElto>::NODO_NULO)
         {
-            iterador++;
-            contador(m->hder);
+            aux++;
+            calcular_altura(m->hder, aux);
+        }else if(m->hder == Abin<tElto>::NODO_NULO)
+        {
+            if(altura<aux)
+           {
+               altura=aux;
+           } 
+            aux--;
         }
         
+        return 0;
     }
-    
-   // cout<<"El iterador es"<<iterator<<endl;
-    //return iterator;
+
 }
 
-void contar(typename Abin<tElto>::nodo m)
+void alturabin(typename Abin<tElto>::nodo m)
 {
     assert(m != Abin<tElto>::NODO_NULO);
     std::cout<<"Ha llegado";
     //int res =
-    contador(m);
+    calcular_altura(m,1);
     //return res;
 }
 
@@ -64,10 +79,10 @@ int main ()
     cout << "\n*** Mostrar árbol binario B ***\n";
     imprimirAbin(B); // En std::cout
 
-    //int num_nodos = 
-    contar(B.raiz());
+   //int num_nodos = 
+    alturabin(B.raiz());
 
-    cout <<"El arbol a tiene"<<iterador<<"nodos"<<endl;
+    cout <<"El arbol a tiene una altura de "<<altura <<endl;
 
     return 0;
     

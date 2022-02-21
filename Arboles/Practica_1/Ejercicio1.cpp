@@ -13,7 +13,6 @@ int main()
     Abin a();
 
     int num_nodos = contar(a);
-    
 
 }
 
