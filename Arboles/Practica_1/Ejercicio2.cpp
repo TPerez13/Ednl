@@ -8,7 +8,7 @@ typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
 static int altura = 0;
-
+/*
 int calcular_altura(typename Abin<tElto>::nodo n,int aux)
 {
      Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
@@ -58,6 +58,8 @@ void alturabin(typename Abin<tElto>::nodo m)
     calcular_altura(m,1);
     //return res;
 }
+*/
+
 
 int main ()
 {
