@@ -7,24 +7,39 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
-void contador(typename Abin<tElto>::nodo n,int* aux)
+//Arbol en mayus, nodo en minus y el contador lo primero que se pone
+void contar_nodosRec(int* aux, Abin<tElto> &A,typename Abin<tElto>::nodo n)
 {
     
     if(n != Abin<tElto>::NODO_NULO)
     {
         Abin<tElto>::nodo m = n; 
         *aux += 1;
-        contador(m->hizq,aux);
-        contador(m->hder,aux);
+        contar_nodosRec(aux,A,a.hizq(n));
+        contar_nodosRec(aux,A,a.hder(n));
     }
 }
 
-int contar(typename Abin<tElto>::nodo m)
+/*Solucion dlh
+void contar_nodosRec(int* aux, Abin<tElto> &A,typename Abin<tElto>::nodo n)
+{
+    if( n = NODO_NULO)  //La igualdad es algo natural el distinto no
+    {
+        return 0;
+    }else
+        return 1 + contar_nodoRec(/*int* aux //Ya no haria falta*/
+        /*,A,A.hizq(n)) + contar_nodoRec(//int* aux*//*,A,A.hder(n));
+    }
+//Hay que comtemplarse el caso limite
+*/
+
+//NO EXISTE NINGUN NODO VACIO
+int contar_nodos(Abin<tElto> &A)
 {
     assert(m != Abin<tElto>::NODO_NULO);
     int sol = 0;
     int* sol_pointer = &sol;
-    contador(m,sol_pointer);
+    contador(A,A.raiz(),sol_pointer);
     
     return sol;
 }
@@ -49,8 +64,8 @@ int main ()
     cout << "\n*** Mostrar árbol binario B ***\n";
     imprimirAbin(B); // En std::cout
 
-    int num_nodos = contar(B.raiz());
-
+    //int num_nodos = contar(B.raiz());
+    int num_nodos = contar_nodos(B);
     cout <<"El arbol a tiene "<<num_nodos<<" nodos"<<endl;
 
     return 0;

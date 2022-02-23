@@ -8,7 +8,7 @@ typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
 static int iterador = 1;
-
+/*
 void contador(typename Abin<tElto>::nodo n)
 {
     Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
@@ -35,13 +35,38 @@ void contador(typename Abin<tElto>::nodo n)
     //return iterator;
 }
 
-void contar(typename Abin<tElto>::nodo m)
+*/
+//Como tiene que funcionar a nivel de caja negra -> lo que le llega y lo que devuelve
+
+void contador(typename Abin<tElto>::nodo n,Abin<tElto> &a)
+{
+    Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
+
+    if (n != Abin<tElto>::NODO_NULO)
+    {
+        m = n;
+
+        if(a.hijoIzqdo(m) != Abin<tElto>::NODO_NULO)
+        {
+            iterador++;
+            contador(a.hijoIzqdo(m),a);
+
+        }
+        if(a.hijoDrcho(m) != Abin<tElto>::NODO_NULO)
+        {
+            iterador++;
+            contador(a.hijoDrcho(m),a);
+        }
+        
+    }
+}
+void contar(typename Abin<tElto>::nodo m, Abin<tElto> &a)
 {
     assert(m != Abin<tElto>::NODO_NULO);
     std::cout<<"Ha llegado";
     //int res =
-    contador(m);
-    //return res;
+    contador(m,a);
+    //return res;   
 }
 
 int main ()
@@ -65,7 +90,7 @@ int main ()
     imprimirAbin(B); // En std::cout
 
     //int num_nodos = 
-    contar(B.raiz());
+    contar(B.raiz(),B);
 
     cout <<"El arbol a tiene"<<iterador<<"nodos"<<endl;
 

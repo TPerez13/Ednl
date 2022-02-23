@@ -8,8 +8,8 @@ typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
 static int altura = 0;
-/*
-int calcular_altura(typename Abin<tElto>::nodo n,int aux)
+
+int calcular_altura(typename Abin<tElto>::nodo n,Abin<tElto> &A,int aux)
 {
      Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
 
@@ -58,7 +58,27 @@ void alturabin(typename Abin<tElto>::nodo m)
     calcular_altura(m,1);
     //return res;
 }
-*/
+//**********************************************************************************//
+int calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
+{
+    if(n == Abin<tElto>::NODO_NULO)
+    {
+        return -1;
+    }else
+    {
+        return 1 +  //MAX (calcular_alturaRec(A.hizq(n),A),calcular_alturaRec(A.hder(n),A))
+    }
+}
+//Si el arbol esta vacio es = -1, Explicarlo en el examen,
+
+
+int calcular_altura(Abin<tElto> &A)
+{
+    assert(!A.arbolVacio());
+    int sol;
+    sol = calcular_alturaRec(A,A.raiz(),0)
+    return sol;
+}
 
 
 int main ()

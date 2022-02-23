@@ -16,7 +16,13 @@ void contador(Abin<tElto>& m,Abin<tElto>::nodo n,int* aux)
         contador(m,m.padre(n),aux);
     }
 }
+/*
+si n = Raiz(A) devolver 0 -> Esto se puede hacer porque en el enunciado dice determina la profundidad de ESTE NODO y si un nodo esta vacio no es nodo
+si n= NODO_NULO devolver -1
 
+sino devolver 1 + profundiad(padre(n),a)
+no existe la profundidad de un arbol, porque coincidiria con la altura
+*/
 int contar(Abin<tElto>& m)
 {
     assert(m.raiz() != Abin<tElto>::NODO_NULO);
