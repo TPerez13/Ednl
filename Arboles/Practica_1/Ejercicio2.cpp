@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 #include "../Implementacion_Arboles/Abin_enlazado.hpp"
 #include "abin_E-S.h"
 
@@ -7,8 +8,8 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
-static int altura = 0;
-
+//static int altura = 0;
+/*
 int calcular_altura(typename Abin<tElto>::nodo n,Abin<tElto> &A,int aux)
 {
      Abin<tElto>::nodo m = Abin<tElto>::NODO_NULO;
@@ -57,7 +58,7 @@ void alturabin(typename Abin<tElto>::nodo m)
     //int res =
     calcular_altura(m,1);
     //return res;
-}
+}*/
 //**********************************************************************************//
 int calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
 {
@@ -66,7 +67,7 @@ int calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
         return -1;
     }else
     {
-        return 1 +  //MAX (calcular_alturaRec(A.hizq(n),A),calcular_alturaRec(A.hder(n),A))
+        return 1 +  max(calcular_alturaRec(A.hijoIzqdo(n),A),calcular_alturaRec(A.hijoDrcho(n),A));
     }
 }
 //Si el arbol esta vacio es = -1, Explicarlo en el examen,
@@ -76,7 +77,7 @@ int calcular_altura(Abin<tElto> &A)
 {
     assert(!A.arbolVacio());
     int sol;
-    sol = calcular_alturaRec(A,A.raiz(),0)
+    sol = calcular_alturaRec(A.raiz(),A);
     return sol;
 }
 
@@ -101,10 +102,9 @@ int main ()
     cout << "\n*** Mostrar árbol binario B ***\n";
     imprimirAbin(B); // En std::cout
 
-   //int num_nodos = 
-    alturabin(B.raiz());
+   int alturaAbin = calcular_altura(B);
 
-    cout <<"El arbol a tiene una altura de "<<altura <<endl;
+    cout <<"El arbol a tiene una altura de "<<alturaAbin <<endl;
 
     return 0;
     

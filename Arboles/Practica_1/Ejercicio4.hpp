@@ -26,6 +26,9 @@ template <typename T> class Abin {
         Abin<T>& operator =(const Abin<T>& A); // asig. de árboles
         ~Abin(); // destructor
 
+        int profundidad(nodo n) const;
+        int altura(nodo n) const;
+
     private:
         struct celda {
         T elto;
@@ -34,6 +37,7 @@ template <typename T> class Abin {
         celda *nodos; // vector de nodos
         size_t maxNodos; // tamaño del vector
         size_t numNodos; // número de nodos del árbol
+        int calcular_alturaRec(nodo n) const;
 };
 
 /* Definición del nodo nulo */
@@ -56,6 +60,39 @@ inline void Abin<T>::insertarRaiz(const T& e)
     nodos[0].padre = NODO_NULO;
     nodos[0].hizq = NODO_NULO;
     nodos[0].hder = NODO_NULO;
+}
+
+template<typename T>
+inline int Abin<T>::profundidad(nodo n) const
+{
+    assert(numNodos!=0);
+
+    int prof = -1;
+
+    for(n; n != nodos[0]; n = n->padre)
+        prof++;
+    
+    return prof;    
+}
+
+template<typename T>
+inline int Abin<T>::altura(nodo n) const
+{
+    assert(!A.arbolVacio());
+    int sol;
+    sol = calcular_alturaRec(A.raiz(),A);
+    return sol;  
+}
+template<typename T>
+inline int Abin<T>::calcular_alturaRec(nodo n) const
+{
+    if(n == NODO_NULO)
+    {
+        return -1;
+    }else
+    {
+        return 1 +  max(calcular_alturaRec(n->hder),calcular_alturaRec(n->hizq));
+    }
 }
 
 template <typename T>

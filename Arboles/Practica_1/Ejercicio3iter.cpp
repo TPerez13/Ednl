@@ -6,34 +6,17 @@
 using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
-/*
-void contador(Abin<tElto>& m,Abin<tElto>::nodo n,int* aux)
-{
-    
-    if(n != Abin<tElto>::NODO_NULO)
-    {
-        *aux += 1;
-        contador(m,m.padre(n),aux);
-    }
-}*/
 
-
-/*
-si n = Raiz(A) devolver 0 -> Esto se puede hacer porque en el enunciado dice determina la profundidad de ESTE NODO y si un nodo esta vacio no es nodo
-si n= NODO_NULO devolver -1
-
-sino devolver 1 + profundiad(padre(n),a)
-no existe la profundidad de un arbol, porque coincidiria con la altura
-*/
 int calcular_profundidad(Abin<tElto> &A,typename Abin<tElto>::nodo n)
 {
-    if(n == Abin<tElto>::NODO_NULO)
+    int prof = -1;
+
+    for(n; n != Abin<tElto>::NODO_NULO; n = A.padre(n))
     {
-        return -1;
+        prof++;
     }
-    else
-        return 1 + calcular_profundidad(A,A.padre(n));
     
+    return prof;    
 }
 
 int main ()

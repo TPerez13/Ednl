@@ -15,20 +15,19 @@ void contar_nodosRec(int* aux, Abin<tElto> &A,typename Abin<tElto>::nodo n)
     {
         Abin<tElto>::nodo m = n; 
         *aux += 1;
-        contar_nodosRec(aux,A,a.hizq(n));
-        contar_nodosRec(aux,A,a.hder(n));
+        contar_nodosRec(aux,A,A.hijoIzqdo(n));
+        contar_nodosRec(aux,A,A.hijoDrcho(n));
     }
 }
 
 /*Solucion dlh
-void contar_nodosRec(int* aux, Abin<tElto> &A,typename Abin<tElto>::nodo n)
+void contar_nodosRec(Abin<tElto> &A,typename Abin<tElto>::nodo n)
 {
     if( n = NODO_NULO)  //La igualdad es algo natural el distinto no
     {
         return 0;
     }else
-        return 1 + contar_nodoRec(/*int* aux //Ya no haria falta*/
-        /*,A,A.hizq(n)) + contar_nodoRec(//int* aux*//*,A,A.hder(n));
+        return 1 + contar_nodoRec(A,A.hizq(n)) + contar_nodoRec(A,A.hder(n));
     }
 //Hay que comtemplarse el caso limite
 */
@@ -36,10 +35,10 @@ void contar_nodosRec(int* aux, Abin<tElto> &A,typename Abin<tElto>::nodo n)
 //NO EXISTE NINGUN NODO VACIO
 int contar_nodos(Abin<tElto> &A)
 {
-    assert(m != Abin<tElto>::NODO_NULO);
+    assert(A.raiz() != Abin<tElto>::NODO_NULO);
     int sol = 0;
     int* sol_pointer = &sol;
-    contador(A,A.raiz(),sol_pointer);
+    contar_nodosRec(sol_pointer,A,A.raiz());
     
     return sol;
 }
