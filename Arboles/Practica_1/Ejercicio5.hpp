@@ -41,6 +41,7 @@ template <typename T> class Abin
         
         nodo r; // nodo raíz del árbol
         void destruirNodos(nodo& n);
+        int calcular_alturaRec() const;
         nodo copiar(nodo n);
 };
 
@@ -220,16 +221,26 @@ int Abin<T>::profundidad(nodo n)
     return sol;
 }
 
-void contador(Abin<tElto>::nodo n,int* aux)
+template <typename T>
+int Abin<T>::calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
 {
-    nodo m = n;
-    
-    if(n != NODO_NULO)
+    if(n == Abin<tElto>::NODO_NULO)
     {
-        *aux += 1;
-
-        contador(m->padre,aux);
+        return -1;
+    }else
+    {
+        return 1 +  max(calcular_alturaRec(A.hijoIzqdo(n),A),calcular_alturaRec(A.hijoDrcho(n),A));
     }
+}
+//Si el arbol esta vacio es = -1, Explicarlo en el examen,
+
+template <typename T>
+int Abin<T>::altura(Abin<tElto> &A)
+{
+    assert(!A.arbolVacio());
+    int sol;
+    sol = calcular_alturaRec(A.raiz(),A);
+    return sol;
 }
 
 #endif // ABIN_H
