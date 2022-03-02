@@ -21,7 +21,7 @@ int calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
 }
 //Si el arbol esta vacio es = -1, Explicarlo en el examen,
 //Hay que dar el recorrido por anchura para hacer este ejercicio
-bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tElto> &A)
+/*bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tElto> &A)
 {
     if(aux+1==altura)   //Miro si el contador ya esta en el penultimo nivel,
     {
@@ -32,10 +32,30 @@ bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tEl
     else
     {
         return min(calcular_pseudocompletoRec(altura,aux++,A.hijoIzqdo(n),A),calcular_pseudocompletoRec(altura,aux++,A.hijoDrcho(n),A));
-    }       //Hago el min porque si en las condiciones de comprobar si es pseudocompleto el return es 0 entonces algun nodo del penultimo nivel
+    }       //
+            //Hago el min porque si en las condiciones de comprobar si es pseudocompleto el return es 0 entonces algun nodo del penultimo nivel
 }           //no cumple la condicion por lo que no seria pseudocompleto    
-
-/* 
+*/
+/*
+bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tElto> &A)
+{
+    if(aux+1==altura)   //Miro si el contador ya esta en el penultimo nivel,
+    {
+        aux--;        //La unica manera que se me ha ocurrido de copntrolar la altura del aux
+        return ((A.hijoIzqdo(n) == Abin<tElto>::NODO_NULO && A.hijoDrcho(n) == Abin<tElto>::NODO_NULO)
+                || (A.hijoIzqdo(n) != Abin<tElto>::NODO_NULO && A.hijoDrcho(n) != Abin<tElto>::NODO_NULO)); //condiciones para ver si es 
+    }                                                                                                       //pseudocompleto
+    else
+    {
+        if (A.hijoIzqdo(n != Abin<tElto>::NODO_NULO))
+        {   
+            return min(calcular_pseudocompletoRec(altura,aux++,A.hijoIzqdo(n),A))
+        }
+         min(,calcular_pseudocompletoRec(altura,aux++,A.hijoDrcho(n),A));
+    }       //
+            //Hago el min porque si en las condiciones de comprobar si es pseudocompleto el return es 0 entonces algun nodo del penultimo nivel
+}           //no cumple la condicion por lo que no seria pseudocompleto    
+*//* 
 bool pseudocompleta(n nodos, A abin)
 {
     si altura(n,A) = 1
@@ -47,12 +67,39 @@ bool pseudocompleta(n nodos, A abin)
             devolver pseudocompleto(hder)
 }
 
+*/
+bool calcular_pseudocompletoRec(Abin<tElto>::nodo n,Abin<tElto> &A)
+{
+    if((calcular_alturaRec(n,A)) == 1)
+    {
+        return (A.hijoIzqdo(n) != Abin<tElto>::NODO_NULO && A.hijoDrcho(n) != Abin<tElto>::NODO_NULO);
+    }
+    else
+    {
+        if(calcular_alturaRec(A.hijoIzqdo(n),A) > calcular_alturaRec(A.hijoDrcho(n),A))
+        {
+            return calcular_pseudocompletoRec(A.hijoIzqdo(n),A);
+        }
+        else
+        {
+            if(calcular_alturaRec(A.hijoIzqdo(n),A) < calcular_alturaRec(A.hijoDrcho(n),A))
+            {
+                return calcular_pseudocompletoRec(A.hijoDrcho(n),A);
+            }
+            else
+            {
+                return (calcular_pseudocompletoRec(A.hijoIzqdo(n),A) && calcular_pseudocompletoRec(A.hijoDrcho(n),A));
+            } 
+        }
+    }
+}
+
 
 bool calcular_pseudocompleto(Abin<tElto> &A)
 {
     int altura = calcular_alturaRec(A.raiz(),A);
 
-    bool sol = calcular_pseudocompletoRec(altura,0,A.raiz(),A);
+    bool sol = calcular_pseudocompletoRec(A.raiz(),A);
 
     return sol;
 }
