@@ -23,7 +23,7 @@ int calcular_alturaRec(Abin<tElto>::nodo n, Abin<tElto> &A)
 //Hay que dar el recorrido por anchura para hacer este ejercicio
 bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tElto> &A)
 {
-    if(aux+1==altura)   // Miro si el contador ya esta en el penultimo nivel,
+    if(aux+1==altura)   //Miro si el contador ya esta en el penultimo nivel,
     {
         aux--;        //La unica manera que se me ha ocurrido de copntrolar la altura del aux
         return ((A.hijoIzqdo(n) == Abin<tElto>::NODO_NULO && A.hijoDrcho(n) == Abin<tElto>::NODO_NULO)
@@ -31,18 +31,32 @@ bool calcular_pseudocompletoRec(int altura,int aux,Abin<tElto>::nodo n, Abin<tEl
     }                                                                                                       //pseudocompleto
     else
     {
-        return min(calcular_pseudocompletoRec(altura,aux++,A.hijoIzqdo(n)),calcular_pseudocompletoRec(altura,aux++,A.hijoDrcho(n)));
+        return min(calcular_pseudocompletoRec(altura,aux++,A.hijoIzqdo(n),A),calcular_pseudocompletoRec(altura,aux++,A.hijoDrcho(n),A));
     }       //Hago el min porque si en las condiciones de comprobar si es pseudocompleto el return es 0 entonces algun nodo del penultimo nivel
-            //no cumple la condicion por lo que no seria pseudocompleto    
+}           //no cumple la condicion por lo que no seria pseudocompleto    
+
+/* 
+bool pseudocompleta(n nodos, A abin)
+{
+    si altura(n,A) = 1
+        devolver num_nodos(n,A) = 2
+    sino
+        si altura(hdrc(n,A)) > altura(hizq(n,A))
+            devolver pseudocompleto(hijodrc)
+        sino
+            devolver pseudocompleto(hder)
 }
+
 
 bool calcular_pseudocompleto(Abin<tElto> &A)
 {
-    int altura = int calcular_alturaRec(A.raiz(),A);
+    int altura = calcular_alturaRec(A.raiz(),A);
 
     bool sol = calcular_pseudocompletoRec(altura,0,A.raiz(),A);
+
     return sol;
 }
+
 int main ()
 {
     Abin<tElto> /*A,*/ B;
@@ -63,7 +77,7 @@ int main ()
     cout << "\n*** Mostrar árbol binario B ***\n";
     imprimirAbin(B); // En std::cout
 
-   int pseduocompletoAbin = calcular_desequilibrio(B);
+   int pseduocompletoAbin = calcular_pseudocompleto(B);
 
     cout <<"El arbol es pseudocompleto: "<<pseduocompletoAbin <<endl;
 
