@@ -21,27 +21,27 @@ const tElto fin = '#'; // Fin de lectura.
 bool similarRec(Abin<tElto>::nodo n1,Abin<tElto>::nodo n2,Abin<tElto> &A1,Abin<tElto> &A2)
 {
 
-    if (n1 != Abin<tElto>::NODO_NULO && n2 != Abin<tElto>::NODO_NULO)        
+    if (n1 == Abin<tElto>::NODO_NULO && n2 == Abin<tElto>::NODO_NULO)        
     {
 		return true;
 	}
 	else
 	{
-		if(A1.hijoIzqdo(n1) == Abin<tElto>::NODO_NULO || A2.hijoIzqdo(n2)==Abin<tElto>::NODO_NULO)
+		if(n1 == Abin<tElto>::NODO_NULO || n2 == Abin<tElto>::NODO_NULO)
 		{
 			return false;
 		}
 		else
 		{	
 			return (similarRec(A1.hijoIzqdo(n1),A2.hijoIzqdo(n2),A1,A2)
-			   		|| similarRec(A1.hijoDrcho(n1),A2.hijoDrcho(n2),A1,A2));
+			   		&& similarRec(A1.hijoDrcho(n1),A2.hijoDrcho(n2),A1,A2));
 		}
 	}
 }
 bool similar(Abin<tElto> &A1, Abin<tElto> &A2)
 {
-	bool similitud = similarRec(A1.raiz(),A2.raiz(),A1,A2);
-    return similitud;
+	//bool similitud = similarRec(A1.raiz(),A2.raiz(),A1,A2);
+    return similarRec(A1.raiz(),A2.raiz(),A1,A2);/*similitud*/;
 }
 
 int main ()
@@ -64,19 +64,21 @@ int main ()
     cout << "\n*** Mostrar árbol binario B ***\n";
     imprimirAbin(B); // En std::cout
 
-    cout << "\n*** Lectura de árbol binario B de abin.dat ***\n";
+    cout << "\n*** Lectura de árbol binario C de abin1.dat ***\n";
     ifstream fe1("abin1.dat"); // Abrir fichero de entrada.
     rellenarAbin(fe1, C); // Desde fichero.
     fe1.close();
 
-    cout << "\n*** Mostrar árbol binario B ***\n";
+    cout << "\n*** Mostrar árbol binario C ***\n";
     imprimirAbin(C); // En std::cout
 	
-	bool simil = similar(B,C);
+	bool simil = similar(C,B);
 
-
-    cout <<"El arbol es similar: "<<similar<<endl;
-
+    if(simil){
+        cout <<"El arbol es similar"<<endl;
+    }else{ 
+        cout <<"El arbol no es similar"<<endl;
+    }
     return 0;
     
 } 
