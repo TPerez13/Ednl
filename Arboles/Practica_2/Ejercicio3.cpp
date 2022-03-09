@@ -17,13 +17,21 @@
 
 using namespace std;
 typedef char tElto;
+/*
+struct
+{
+	float operando;
+	char operador;
+}
+
+*/
 
 const tElto fin = '#'; // Fin de lectura.
 
 
 float CalculadoraAbinRec(Abin<tElto>::nodo n,Abin<tElto>& A)
 {
-
+	// if(A.hijoIzqdo(n) != Abin<tElto>::NODO_NULO) -> como o tiene 2 hijos o ninguno solo tienes que comprobar 1 de ellos
 	if(A.hijoIzqdo(n) != Abin<tElto>::NODO_NULO && A.hijoDrcho(n) !=Abin<tElto>::NODO_NULO )
 	{
 		switch(A.elemento(n))
@@ -40,7 +48,7 @@ float CalculadoraAbinRec(Abin<tElto>::nodo n,Abin<tElto>& A)
 		
 	}else
 	{
-		return A.elemento(n);
+		return A.elemento(n);// Es preferible hacerlo al reves
 	}
 }
 

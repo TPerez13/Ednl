@@ -7,11 +7,26 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
+void contar_nodosRec(Abin<tElto> &A,typename Abin<tElto>::nodo n)
+{
+    if(n == NODO_NULO)  //La igualdad es algo natural el distinto no
+    {
+        return 0;
+    }else
+        return 1 + contar_nodoRec(A,A.hizq(n)) + contar_nodoRec(A,A.hder(n));
+}
+//Hay que comtemplarse el caso limite
+
 int contar_nodosverdesRec(Abin<tElto>::nodo n,Abin<tElto> &A)
 {
     if(A.hijoIzqdo(n) != Abin<tElto>::NODO_NULO && A.hijoDrcho(n) != Abin<tElto>::NODO_NULO)
     {
-        if(contar_nodos(A.hijoIzqdo(n),A) + contar_nodos(A.hijoDrcho(n),A) > 3)
+        if (
+            ((contar_nodosRec(A.hijoIzqdo(n),A) + contar_nodosRec(A.hijoDrcho(n),A))-
+            (contar_nodosRec(A.hijoIzqdo(A.hijoIzqdo(n)),A) + contar_nodosRec(A.hijoIzqdo(A.hijoDrcho(n)),A)
+            contar_nodosRec(A.hijoDrcho(A.hijoIzqdo(n)),A) + contar_nodosRec(A.hijoDrcho(A.hijoDrcho(n)),A)) 
+            == 3)
+            )
         {
             return 1 + contar_nodosverdesRec(A.hijoIzqdo(n),A) + contar_nodosverdesRec(A.hijoDrcho(n),A);
         }
