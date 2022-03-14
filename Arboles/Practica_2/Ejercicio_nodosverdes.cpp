@@ -32,7 +32,7 @@ int contar_nodosverdesRec(Abin<tElto>::nodo n,Abin<tElto> &A)
         }
     }else
     {
-        return 0;
+        return 0 + contar_nodosverdesRec(A.hijoIzqdo(n),A) + contar_nodosverdesRec(A.hijoDrcho(n),A);
     }
 }
 
