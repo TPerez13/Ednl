@@ -6,6 +6,42 @@ using namespace std;
 typedef char tElto;
 const tElto fin = '#'; // Fin de lectura.
 
+/*
+entero GradoAgen(A Abin)
+{
+    devolver GradoAgen_Rec(Raiz(A),A)
+}
+
+entero GradoAgen_Rec(n nodo, A agen)
+{
+    si n = Nodo_nulo
+        devolver 0
+    sino
+        gr = numhijos(n,A)
+
+        Hijo = Hijoizqdo(n,A)
+
+        mientras(hijo != nODO_NULO)
+            gr = max(gr, gradoAgen_rec(hijo,A))
+            hijo = Hermanodrcho(Hijo,A)
+        F mientras
+            devolver gr
+
+
+       /* int n = 1;
+        if(HijoIzq(n) != NODO_NULO)
+        {
+            while(n!= NODO_NULO,n=HemanoDrcho)
+            {
+                n++;
+            }
+        }else{
+            n--
+        }
+        devolver max(n)*/
+
+}
+*/
 
 
 
