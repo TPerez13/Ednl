@@ -109,3 +109,15 @@ int main ()
     return 0;
     
 } 
+
+int altura(Abin<tElto>::nodo n, Abin<tELto> &A)
+{
+    if(n == Abin<tELto>::NODO_NULO)
+    {
+        return -1;
+    }
+    else
+    {
+        return 1 + max(altura(A.hijoIzqdo(n),A),altura(A.hijoDrcho(n),A));
+    }
+}
