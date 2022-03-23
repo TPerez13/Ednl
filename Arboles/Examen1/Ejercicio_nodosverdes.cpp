@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "../Implementacion_Arboles/Abin_enlazado.hpp"
-#include "abin_E-S.h"
+#include "../Practica_1/abin_E-S.h"
 
 using namespace std;
 typedef char tElto;

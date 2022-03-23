@@ -16,7 +16,7 @@ void eliminar_Descendencia_Rec(Abin<tElto>::nodo n, Abin<tElto> &A)
     {
         eliminar_Descendencia_Rec(A.hijoIzqdo(n),A);
         eliminar_Descendencia_Rec(A.hijoDrcho(n),A);
-
+        ///ESTO ESTA MAL
         if(A.hijoIzqdo(n) == Abin<tElto>::NODO_NULO &&
             A.hijoDrcho(n) == Abin<tElto>::NODO_NULO)
         {
