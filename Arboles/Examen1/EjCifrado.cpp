@@ -82,3 +82,29 @@ void construir_Arbol(char* cad_cif,int h,int i, int j,Abin<tElto>::nodo n, Abin<
         construir_Arbol(cad_cif,h,j-pow(2,h-1)+1,j,A.hijoDrcho(n),A)
     }
 }
+
+
+void recorrido_Anchura(Abin<tELto>::nodo n, Abin <tElto> &A)
+{
+    if(n != NODO_NULO)
+    {
+        do
+        {
+            if(!C.vacia())
+            {
+                n = C.primero();
+                C.pop();
+            }
+
+            cod_des[aux] = a.elmento(n);
+            aux++;
+
+            if(A.HijoIzqdo(n) != NODO_NULO)
+                C.push(A.hijoIzqdo(n));
+            if(A.hijoDrcho(n) != NODO_NULO)
+                C.push(A.hijoDrcho(n));
+
+        } while (!C.vacia());
+        
+    }
+}

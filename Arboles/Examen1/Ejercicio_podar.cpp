@@ -20,15 +20,14 @@ void podaAbin_Rec(int num,Abin<tElto>::nodo n,Abin<tElto> &A)
 
 void eliminar_desc(Abin<tElto>::nodo n,Abin<tElto> &A)
 {
-    if(n!= NODO_NULO)
+    if(A.hijoIzqdo(n)) != NODO_NULO)
     {
-        eliminar_desc(A.hijoIzqdo(n),A);
-
-        eliminar_desc(A.hijoDrcho(n),A)
-
-        if(A.HijoIzqdo(A.padre(n))!=NODO_NULO)
-            A.eliminarHijoIzqdo(A.padre(n));
-        if(A.HijoIzqdo(A.padre(n))!=NODO_NULO)
-            A.eliminarHijoDrcho(A.padre)
+       eliminar_desc(A.hijoIzqdo(n),A);
+       A.eliminarHijoIzqdo(n);
+    }
+    if(A.HijoDrcho(n) != NODO_NULO)
+    {
+        eliminar_desc(A.HijoDrcho(n),A);
+        A.eliminarHijoDrcho(n);
     }
 }
