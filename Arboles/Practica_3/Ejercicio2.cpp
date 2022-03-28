@@ -56,44 +56,22 @@ int numHijos(Agen<t>::nodo n,Agen &A)
     return cont;
 }
 
-int gradoAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
+int profundidadAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
 {
     if(n == Agen<t>::NODO_NULO)
     {
-        return 0;
+        return -1;
     }else
     {
-        Agen<t>::nodo n1 = A.hijoIzqdo(n);
-        int grado = numHijos(n,A);
-        
-        while(n != Agen<t>::NODO_NULO)
-        {
-            grado = max(grado, gradoAgen_Rec(n1));
-            n1 = A.hermDrcho(n1,A);
-        }
-        return grado;
+        return 1 + profundidadAgen_Rec(A.padre(n),A);
     }
 }
 
-int gradoAgen(Agen<t> &A)
+int profundidadAgen(Agen<t> &A)
 {
     return gradoAgen_Rec(A.raiz(),A);
 }
-/* 
-  si n = Nodo_nulo
-        devolver 0
-    sino
-        gr = numhijos(n,A)
 
-        Hijo = Hijoizqdo(n,A)
-
-        mientras(hijo != nODO_NULO)
-            gr = max(gr, gradoAgen_rec(hijo,A))
-            hijo = Hermanodrcho(Hijo,A)
-        F mientras
-            devolver gr
-
-*/
 int main ()
 {
     Agen<t> A(16), B(16);
