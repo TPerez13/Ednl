@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "../Implementacion_Arboles/Agen_enlazado.hpp"
+#include "agen_E-S.h"
 
 using namespace std;
 typedef char t;
@@ -40,16 +41,15 @@ entero GradoAgen_Rec(n nodo, A agen)
         }
         devolver max(n)*/
 
-}*/
 
-int numHijos(Agen<t>::nodo n,Agen &A)
+int numHijos(Agen<t>::nodo n,Agen<t> &A)
 {
     int cont = 0;
-    n = A.hijoIzqdo(n);
+    Agen<t>::nodo n1 = A.hijoIzqdo(n);
 
-    while(n != Agen<t>::NODO_NULO)
-    { 
-        n = A.hermDrcho(n,A);
+    while(n1 != Agen<t>::NODO_NULO)
+    {  
+        n1 = A.hermDrcho(n1);
         cont++;
     }
 
@@ -68,8 +68,8 @@ int gradoAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
         
         while(n != Agen<t>::NODO_NULO)
         {
-            grado = max(grado, gradoAgen_Rec(n1));
-            n1 = A.hermDrcho(n1,A);
+            grado = max(grado, gradoAgen_Rec(n1,A));
+            n1 = A.hermDrcho(n1);
         }
         return grado;
     }
@@ -96,15 +96,15 @@ int gradoAgen(Agen<t> &A)
 */
 int main ()
 {
-    Agen<t> A(16), B(16);
+    Agen<t> A, B;
 
-    cout << "*** Lectura del árbol A ***\n";
+    /*cout << "*** Lectura del árbol A ***\n";
     rellenarAgen(A, fin); // Desde std::cin
     ofstream fs(“agen.dat”); // Abrir fichero de salida.
     imprimirAgen(fs, A, fin); // En fichero.
     fs.close();
     cout << "\n*** Árbol A guardado en fichero agen.dat ***\n";
-
+    */
     cout << "\n*** Lectura de árbol B de agen.dat ***\n";
     ifstream fe(“agen.dat”); // Abrir fichero de entrada.
     rellenarAgen(fe, B); // Desde fichero.
