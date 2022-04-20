@@ -8,12 +8,12 @@ const t fin = '#'; // Fin de lectura.
 
 int desequilibrioAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
 {
-    if(n == Agen<t>::NODO_NULO)
+    if(numHijos()<2)
     {
-        return 0;
+        return altura(n,A);
     }else
     {
-        Agen<t>::nodo n = A.hijoIzqdo(n);
+        Agen<t>::nodo hijo = A.hijoIzqdo(n);
         
         int max;
         int resultado;
@@ -23,11 +23,11 @@ int desequilibrioAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
             max = maxAltura(n, A);
             min = minAltura(n, A);
             
-            resultado = max(max-min,desequilibrioAgen_Rec(n,A));
+            resultado = max(max-min,desequilibrioAgen_Rec(hijo,A));
             
-            n1 = A.hermDrcho(n1,A);
+            hijo = A.hermDrcho(hijo,A);
         }
-        return grado;
+        return resultado;
     }
 }
 
