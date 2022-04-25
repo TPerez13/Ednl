@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "../Implementacion_Arboles/Abin_busqueda.hpp"
 #include "abin_E-S.h"
 
@@ -70,5 +71,42 @@ int main ()
     
 } 
 
+//Ejercicio de repaso
+
+void equilibrio(Abb<t> &A)
+{
+    Abb B();
+
+    if(!A.vacio())
+    {
+        vector<t> vec;
+        arbol_inorden(A,vec);
+        rellenar_B(B,vec,0,vec.size()-1);
+    }  
+    
+    A = B;
+}
+
+void arbol_inorden(Abb<t> &A,int &vec)
+{
+    if(!A.vacio())
+    {
+        arbol_inorden(A.izqdo(),vec);
+        vec.push_back(A.elemento());
+        arbol_inorden(A.drcho(),vec);
+    }
+}
+
+void rellenar_B(Abb <t> &A, int &vec,int min, int max)
+{
+     int elemAInsertar= (max+min)/2;
+    A.insertar(v[elemAInsertar]);
+    if (min != max)             //(si min == max, entonces no tenemos que hacer más recursiones)
+    {
+        rellenar_B(A,vec, min, elemAInsertar);
+        rellenar_B(A,vec, elemAInsertar+1, max);
+    }
+    
+}
 
 
