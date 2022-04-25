@@ -165,3 +165,25 @@ Abb<T>::~Abb()
     }
 }
 #endif // ABB_H
+
+
+
+//Ejercicio por segunda vez:
+
+template <typename T>
+Abb<T>::podar(int num)
+{
+    Abb poda = buscar(num);
+
+    podar_Rec(poda);
+}
+
+template<typename T>
+Abb<T>::podar_Rec(Abb& A)
+{
+    if(!A.vacio()){
+        podar_Rec(r->hizq);
+        podar_Rec(r->hder);
+        delete A;
+    }
+}
