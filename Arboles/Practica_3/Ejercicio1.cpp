@@ -116,3 +116,22 @@ int main ()
     std::cout<<"El grado de este arbol es:"<<gradoAgen(B)<<std::endl;
 } 
 
+/*Repaso*/
+
+numhijos_Rec(agen A,nodo n)
+{
+    if(n != NODO_NULO)
+    {
+        nodo hijo = A.hijoIzqdo(n);
+
+        int num = numhijos();
+
+        while(hijo != NODO_NULO)
+        {
+            num = max(num,numhijos_Rec(A,A.hijo(hijo)));
+            hijo = A.hermDrcho(hijo);
+        }     
+        
+        return num;
+    }
+}
