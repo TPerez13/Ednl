@@ -8,7 +8,7 @@ const t fin = '#'; // Fin de lectura.
 
 int desequilibrioAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
 {
-    if(numHijos()<2)
+    if(A.numHijos(n)<2)
     {
         return altura(n,A);
     }else
