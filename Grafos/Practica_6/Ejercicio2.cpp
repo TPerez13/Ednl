@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <limits>
+#include <algorithm>    // std::sort
 
 using namespace std;
 /*
@@ -39,8 +40,40 @@ Lista<Grafo::vertice> Profundidad2(const Grafo& G, Grafo::vertice u)
     } while (i != u);
     return Lv;
 }*/
-
 //MAIN---------------------------------
+
+template<typename T>
+typename GrafoP<T>::tCoste longitud(GrafoP<T> &G)
+{
+    typedef typename GrafoP<T>::vertice vertice;
+
+    vertice pseudocentro,v;
+
+    size_t numVert = G.numVert();
+    
+    vector<T> aux;
+    vector<vertice> aux_vert;
+
+    int sumatorio = 10000;
+
+    for(v=0;v<numVert;v++)
+    {
+        aux = Dijkstra(G,v,aux_vert);
+
+        sort(aux.begin(),aux.end());
+
+        cout << aux[numVert-2]<<"||||"<<aux[numVert-1]<<endl;
+        if(aux[numVert-2]+aux[numVert-1] < sumatorio)
+        {
+            pseudocentro = v;
+            sumatorio = aux[numVert-2]+aux[numVert-1];   
+        }
+    }
+
+    return sumatorio;
+
+}
+
 int main()
 {
     GrafoP<unsigned int> G("gNoDiri.txt");
@@ -48,14 +81,8 @@ int main()
     cout << "--- Grafo G ---" <<endl;
     cout << G << endl;
 
-    //cout << "Búsqueda del pseudocentro: " <<endl;
-    //typename GrafoP<unsigned int>::tCoste diam = diametro(G);
-    //cout<< "\nDiámetro: "<< diam << endl;
-
-    GrafoP<unsigned int> A("gAciclico.txt");
-
-    cout << "--- Grafo G ---" <<endl;
-    cout << A << endl;
+    cout << "--- Longitud Grafo G ---" <<endl;
+    cout << longitud(G) << endl;
 
 
     return 0;
