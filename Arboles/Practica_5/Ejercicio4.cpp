@@ -12,9 +12,9 @@ bool agenTernario_Rec(Agen<T>::nodo n,Agen<t> A)
                 hijo = A.hermDrcho(hijo);   
             }
             
-            return true
-        }else
             return true;
+        }else
+            return false;
 
     }
 

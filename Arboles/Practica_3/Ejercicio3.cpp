@@ -15,7 +15,7 @@ int desequilibrioAgen_Rec(Agen<t>::nodo n,Agen<t> &A)
     {
         Agen<t>::nodo hijo = A.hijoIzqdo(n);
         
-        int max;
+        int max,min;
         int resultado;
 
         while(n != Agen<t>::NODO_NULO)

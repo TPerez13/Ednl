@@ -48,3 +48,26 @@ void arbolespejo_Rec(Abin<tElto>::nodo n1,Abin<tElto>::nodo n2,Abin<tElto> &A1,A
 }
 
 //Ejercicio3:
+
+struct Expresion
+{
+    float value;
+    char op;
+}
+
+float cal_expres_Rec(Abin<tElto>::nodo n,Abin<Expresion> &A)
+{
+    
+    if(A.hijoDrcho(n) == Abin<Expresion>::NODO_NULO && A.hijoDrcho(n) == Abin<Expresion>::NODO_NULO)
+    {
+        return A.elemento(n).value;
+    }else{
+        switch(A.elemento(n).op){
+            case 'x' = cal_expres_Rec(A.hijoIzqdo(n),A) * cal_expres_Rec(A.hijoDrcho(n),A);break;
+            case '/' = cal_expres_Rec(A.hijoIzqdo(n),A) / cal_expres_Rec(A.hijoDrcho(n),A);break;
+            case '-' = cal_expres_Rec(A.hijoIzqdo(n),A) - cal_expres_Rec(A.hijoDrcho(n),A);break;
+            case '+' = cal_expres_Rec(A.hijoIzqdo(n),A) * cal_expres_Rec(A.hijoDrcho(n),A);break;
+        }
+    }
+
+}
